@@ -101,7 +101,6 @@ export default defineConfig(({ command }: ConfigInput) => {
           sourcemap: false,
           manualChunks: {
             vendor: ['react', 'react-dom'],
-            redux: ['@reduxjs/toolkit', 'react-redux'],
           },
         },
       },

@@ -15,7 +15,6 @@ Vite Template optimized for building advanced DomoApps.
 * [Available Scripts](#available-scripts)
   + [`pnpm generate`](#pnpm-generate)
       - [*Components*](#components)
-      - [*Reducers*](#reducers)
   + [`pnpm start`](#pnpm-start)
   + [`pnpm test`](#pnpm-test)
   + [`pnpm build`](#pnpm-build)
@@ -68,20 +67,11 @@ The following scripts are provided in the base template. The examples in this se
 
 ### `pnpm generate`
 
-The command `pnpm generate` will generate a new component or reducer slice, and add it to your project (or the [`da` cli]([@domoinc/da](https://www.npmjs.com/package/@domoinc/da#da-generate-template)), if installed globally)
+The command `pnpm generate` will generate a new component and add it to your project (or the [`da` cli]([@domoinc/da](https://www.npmjs.com/package/@domoinc/da#da-generate-template)), if installed globally)
 
 #### *Components*
 
 The new component will be added in the `src/components` folder. The storybook and test files (if selected) will be included in the same folder.
-
-#### *Reducers*
-
-Generating a slice will produce the following modifications to your project:
-
-1. A new folder will be created in the `/src/reducers` directory of your project and a `slice.ts` file will be added to it with some boiler plate examples for actions and selectors using Redux Toolkit.
-More info can be found in the Redux Toolkit [documentation](https://redux-toolkit.js.org/api/createSlice).
-2. The `index.ts` file in the base of the reducer folder will be modified to import your new slice and wire it up.
-_As long as you always create slices using the generator command, you should never need to touch this file._
 
 ### `pnpm start`
 
