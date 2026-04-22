@@ -1,70 +1,67 @@
-# Getting Started with Create React App
+# Mapbox World Map
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A Domo Custom App that renders a world map with [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js/guides/), powered by a Domo dataset. Points are sized and colored by city population; the underlying dataset is wired through `manifest.json` mapping and served to the app via the dev-server proxy.
 
-## Available Scripts
+This repo is the companion sample for the **[Mapbox World Map tutorial](https://domo.com/docs/portal/Apps/App-Framework/Tutorials/React/Todo-App)**.
 
-In the project directory, you can run:
+## What it demonstrates
 
-### `yarn start`
+- Scaffolding a Vite + React + TypeScript app with the [DA CLI](https://domo.com/docs/portal/Apps/App-Framework/Tools/da-cli)
+- Uploading a CSV to Domo and wiring it through `manifest.json` `mapping[]` with field aliases
+- Fetching mapped data with `ryuu.js` (`domo.get('/data/v1/geoData')`)
+- Rendering points as a GeoJSON circle layer with per-feature radius/color expressions
+- Using a custom Mapbox style (`map-style.json`) or a hosted Mapbox Studio style
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Project layout
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```
+src/
+├── main.tsx                       # App entry (Provider optional — Redux is scaffolded but unused)
+├── components/
+│   ├── App/App.tsx                # Renders <Map />
+│   └── Map/
+│       ├── Map.tsx                # Fetch, transform, init map, add layer
+│       ├── Map.module.scss
+│       └── map-style.json         # Custom monochrome style (optional)
+data/
+└── World_Cities.csv               # Sample source dataset (~47k rows)
+```
 
-### `yarn test`
+## Prerequisites
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Node 18+
+- The [DA CLI](https://www.npmjs.com/package/@domoinc/da) and the [Domo CLI](https://domo.com/docs/portal/Apps/App-Framework/Quickstart/Setup-and-Installation)
+- `domo login` completed against your target instance
+- A free [Mapbox account](https://account.mapbox.com/auth/signup/) and access token
 
-### `yarn build`
+## Getting started
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Upload `data/World_Cities.csv` to your Domo instance and grab its dataset ID.
+2. Paste the dataset ID into `public/manifest.json` under `mapping[0].dataSetId`.
+3. Publish an initial design to get a `proxyId`:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+   ```bash
+   pnpm install
+   pnpm upload
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+4. Create a card on the published design (select the dataset when prompted) and copy the `id` + `proxyId` back into `public/manifest.json`.
+5. Paste your Mapbox access token into `src/components/Map/Map.tsx` (replace `YOUR_MAPBOX_ACCESS_TOKEN`).
+6. Run locally:
 
-### `yarn eject`
+   ```bash
+   pnpm start
+   ```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+See the [tutorial](https://domo.com/docs/portal/Apps/App-Framework/Tutorials/React/Todo-App) for the full walk-through.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Scripts
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+| Command          | Description                                           |
+| ---------------- | ----------------------------------------------------- |
+| `pnpm start`     | Vite dev server with the Domo proxy                   |
+| `pnpm build`     | Lint, test, and build for production                  |
+| `pnpm upload`    | Build and `domo publish` in one step                  |
+| `pnpm generate`  | Scaffold new components / reducers with `da generate` |
+| `pnpm test`      | Run Vitest                                            |
+| `pnpm storybook` | Launch Storybook                                      |

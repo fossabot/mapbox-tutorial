@@ -5,38 +5,21 @@
     "width": 3,
     "height": 3
   },
+  "fullpage": true,
   "mapping": [
     {
       "alias": "geoData",
-      "dataSetId": "08a9f9eb-b7c3-4066-abba-47875733b0de",
+      "dataSetId": "8e6d8304-3949-4d84-817a-2334109ae933",
       "fields": [
-        {
-          "alias": "id",
-          "columnName": "id"
-        },
-        {
-          "alias": "city",
-          "columnName": "city"
-        },
-        {
-          "alias": "country",
-          "columnName": "country"
-        },
-        {
-          "alias": "lat",
-          "columnName": "lat"
-        },
-        {
-          "alias": "long",
-          "columnName": "lng"
-        },
-        {
-          "alias": "dataPoint",
-          "columnName": "population"
-        }
+        { "alias": "id", "columnName": "id" },
+        { "alias": "city", "columnName": "city" },
+        { "alias": "country", "columnName": "country" },
+        { "alias": "lat", "columnName": "lat" },
+        { "alias": "long", "columnName": "lng" },
+        { "alias": "dataPoint", "columnName": "population" }
       ]
     }
   ],
-  "id": "c94683a0-360a-4f06-abc5-11758d78fcbb",
-  "proxyId": "619647ac-9f47-4f42-9332-27e22054bdfb"
+  "id": "922c41e1-20c0-4c96-93b5-4bf398cb392c",
+  "proxyId": "42b50301-e843-4e4e-88c4-9451f021f373"
 }
